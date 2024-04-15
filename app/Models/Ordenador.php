@@ -10,4 +10,9 @@ class Ordenador extends Model
     use HasFactory;
 
     protected $table = ordenadores;
+
+    public function aula()
+    {
+        return $this->belongsTo(Aula::class);
+    }
 }

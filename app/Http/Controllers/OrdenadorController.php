@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrdenadorRequest;
 use App\Http\Requests\UpdateOrdenadorRequest;
 use App\Models\Ordenador;
+use Illuminate\Support\Facades\Request;
 
 class OrdenadorController extends Controller
 {

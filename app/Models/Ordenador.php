@@ -9,7 +9,7 @@ class Ordenador extends Model
 {
     use HasFactory;
 
-    protected $table = ordenadores;
+    protected $table = 'ordenadores';
 
     public function aula()
     {

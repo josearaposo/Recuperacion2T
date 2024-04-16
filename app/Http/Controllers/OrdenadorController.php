@@ -31,14 +31,14 @@ class OrdenadorController extends Controller
    /**
     * Store a newly created resource in storage.
     */
-   public function store(StoreCompanyaRequest $request)
+   public function store(Request $request)
    {
        $validated = $request->validate([
            'nombre' => 'required|max:255',
        ]);
 
 
-       $companya = new Companya();
+       $companya = new Ordenador();
        $companya->nombre = $validated['nombre'];
        $companya->save();
        session()->flash('success', 'El companya se ha creado correctamente.');
@@ -49,7 +49,7 @@ class OrdenadorController extends Controller
    /**
     * Display the specified resource.
     */
-   public function show(Companya $companya)
+   public function show(Ordenador $companya)
    {
        //
    }
@@ -58,7 +58,7 @@ class OrdenadorController extends Controller
    /**
     * Show the form for editing the specified resource.
     */
-   public function edit(Companya $companya)
+   public function edit(Ordenador $companya)
    {
        return view('ordenadores.edit', [
            'companya' => $companya,
@@ -69,7 +69,7 @@ class OrdenadorController extends Controller
    /**
     * Update the specified resource in storage.
     */
-   public function update(UpdateCompanyaRequest $request, Companya $companya)
+   public function update(Request $request, Ordenador $companya)
    {
        $validated = $request->validate([
            'nombre' => 'required|max:255',
@@ -86,7 +86,7 @@ class OrdenadorController extends Controller
    /**
     * Remove the specified resource from storage.
     */
-   public function destroy(Companya $companya)
+   public function destroy(Ordenador $companya)
    {
        $companya->delete();
        return redirect()->route('ordenadores.index');

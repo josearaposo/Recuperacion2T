@@ -15,4 +15,14 @@ class Ordenador extends Model
     {
         return $this->belongsTo(Aula::class);
     }
+
+    public function cambios()
+    {
+        return $this->hasMany(Cambio::class);
+    }
+
+    public function dispositivos()
+    {
+        return $this->morphMany(Dispositivo::class, 'cambiable');
+    }
 }

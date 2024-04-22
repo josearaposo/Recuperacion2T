@@ -23,6 +23,6 @@ class Ordenador extends Model
 
     public function dispositivos()
     {
-        return $this->morphMany(Dispositivo::class, 'cambiable');
+        return $this->morphMany(Dispositivo::class, 'colocable');
     }
 }

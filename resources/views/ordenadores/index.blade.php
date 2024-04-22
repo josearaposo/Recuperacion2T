@@ -15,6 +15,9 @@
                     <th scope="col" class="px-6 py-3" colspan="2">
                         Acción
                     </th>
+                    <th scope="col" class="px-6 py-3" colspan="2">
+                        Dispositivos
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -35,15 +38,20 @@
                                 {{$ordenador->aula->nombre }}
                             </a>
                         </th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <a class="text-blue-500 blue" href="{{ route('ordenadores.show', $ordenador) }}">
+                                {{$ordenador->dispositivos->count() }}
+                            </a>
+                        </th>
                         <td class="px-6 py-4">
-                            <a href="{{ route('ordenadores.edit', ['ordenadore' => $ordenador]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                            <a href="{{ route('ordenadores.edit', ['ordenador' => $ordenador]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                 <x-primary-button>
                                     Editar
                                 </x-primary-button>
                             </a>
                         </td>
                         <td class="px-6 py-4">
-                            <form action="{{ route('ordenadores.destroy', ['ordenadore' => $ordenador]) }}" method="POST">
+                            <form action="{{ route('ordenadores.destroy', ['ordenador' => $ordenador]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <x-primary-button class="bg-red-500">

@@ -9,7 +9,7 @@ class Dispositivo extends Model
 {
     use HasFactory;
 
-    public function cambiable()
+    public function colocable()
     {
         return $this->morphTo();
     }

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreOrdenadorRequest;
-use App\Http\Requests\UpdateOrdenadorRequest;
+use App\Models\Aula;
 use App\Models\Ordenador;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class OrdenadorController extends Controller
 {
@@ -25,7 +24,9 @@ class OrdenadorController extends Controller
     */
    public function create()
    {
-       return view('ordenadores.create');
+    return view('ordenadores.create', [
+        'aulas' => Aula::all(),
+    ]);
    }
 
 
@@ -35,14 +36,18 @@ class OrdenadorController extends Controller
    public function store(Request $request)
    {
        $validated = $request->validate([
-           'nombre' => 'required|max:255',
+           'marca' => 'required|max:255',
+           'modelo' => 'required|max:255',
+           'aula_id' => 'required|max:255',
        ]);
 
 
-       $companya = new Ordenador();
-       $companya->nombre = $validated['nombre'];
-       $companya->save();
-       session()->flash('success', 'El companya se ha creado correctamente.');
+       $ordenador = new Ordenador();
+       $ordenador->marca = $validated['marca'];
+       $ordenador->modelo = $validated['modelo'];
+       $ordenador->aula_id = $validated['aula_id'];
+       $ordenador->save();
+       session()->flash('success', 'El ordenador se ha creado correctamente.');
        return redirect()->route('ordenadores.index');
    }
 
@@ -50,19 +55,23 @@ class OrdenadorController extends Controller
    /**
     * Display the specified resource.
     */
-   public function show(Ordenador $companya)
+   public function show(Ordenador $ordenador)
    {
-       //
+    return view('ordenadores.detalle', [
+        'ordenador' => $ordenador,
+        'cambios' => $ordenador-> cambios,
+    ]);
    }
 
 
    /**
     * Show the form for editing the specified resource.
     */
-   public function edit(Ordenador $companya)
+   public function edit(Ordenador $ordenador)
    {
        return view('ordenadores.edit', [
-           'companya' => $companya,
+           'ordenador' => $ordenador,
+           'aulas' => Aula::all(),
        ]);
    }
 
@@ -70,15 +79,18 @@ class OrdenadorController extends Controller
    /**
     * Update the specified resource in storage.
     */
-   public function update(Request $request, Ordenador $companya)
+   public function update(Request $request, Ordenador $ordenador)
    {
-       $validated = $request->validate([
-           'nombre' => 'required|max:255',
-       ]);
+    $validated = $request->validate([
+        'marca' => 'required|max:255',
+        'modelo' => 'required|max:255',
+        'aula_id' => 'required|max:255',
+    ]);
 
-
-       $companya->nombre = $validated['nombre'];
-       $companya->save();
+    $ordenador->marca = $validated['marca'];
+    $ordenador->modelo = $validated['modelo'];
+    $ordenador->aula_id = $validated['aula_id'];
+    $ordenador->save();
        session()->flash('success', 'El companya se ha editado correctamente.');
        return redirect()->route('ordenadores.index');
    }
@@ -87,9 +99,9 @@ class OrdenadorController extends Controller
    /**
     * Remove the specified resource from storage.
     */
-   public function destroy(Ordenador $companya)
+   public function destroy(Ordenador $ordenador)
    {
-       $companya->delete();
+       $ordenador->delete();
        return redirect()->route('ordenadores.index');
    }
 

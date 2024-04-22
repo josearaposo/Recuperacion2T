@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aula;
+use App\Models\Cambio;
 use App\Models\Ordenador;
 use Illuminate\Http\Request;
 
@@ -81,6 +82,13 @@ class OrdenadorController extends Controller
     */
    public function update(Request $request, Ordenador $ordenador)
    {
+    if($ordenador->aula_id != $request->aula_id){
+        $cambio = new Cambio();
+        $cambio-> ordenador_id = $ordenador->id;
+        $cambio->origen_id = $ordenador->aula_id;
+        $cambio->destino_id = $request->aula_id;
+        $cambio -> save();
+    };
     $validated = $request->validate([
         'marca' => 'required|max:255',
         'modelo' => 'required|max:255',

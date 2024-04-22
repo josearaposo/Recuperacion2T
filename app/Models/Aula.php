@@ -9,9 +9,14 @@ class Aula extends Model
 {
     use HasFactory;
 
-    public function cambios()
+    public function cambioOrigen()
     {
-        return $this->hasMany(Cambio::class);
+        return $this->hasMany(Cambio::class, 'origen_id');
+    }
+
+    public function cambioDestino()
+    {
+        return $this->hasMany(Cambio::class, 'destino_id');
     }
 
     public function ordenadores()

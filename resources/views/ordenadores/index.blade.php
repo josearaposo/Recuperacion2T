@@ -12,12 +12,13 @@
                     <th scope="col" class="px-6 py-3">
                         Aula
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        Dispositivos
+                    </th>
                     <th scope="col" class="px-6 py-3" colspan="2">
                         Acción
                     </th>
-                    <th scope="col" class="px-6 py-3" colspan="2">
-                        Dispositivos
-                    </th>
+
                 </tr>
             </thead>
             <tbody>
@@ -40,7 +41,8 @@
                         </th>
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <a class="text-blue-500 blue" href="{{ route('ordenadores.show', $ordenador) }}">
-                                {{$ordenador->dispositivos->count() }}
+
+                                {{$ordenador->dispositivos()->count() }}
                             </a>
                         </th>
                         <td class="px-6 py-4">

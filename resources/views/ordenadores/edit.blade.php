@@ -20,23 +20,22 @@ Editar
                     required autofocus autocomplete="modelo" />
                 <x-input-error :messages="$errors->get('modelo')" class="mt-2" />
             </div>
-            <div>
-                <x-input-label for="aula_id" :value="'Aula del Ordenador'" />
+
+            <!-- Desarrolladora -->
+            <div class="mt-4">
+                <x-input-label for="aula_id" :value="'Aula del ordenador'" />
                 <select id="aula_id"
                     class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
-                    name="aula_id" required>
-                    @forelse ($aulas as $aula)
-                    <option value="{{ $aula->id }}"
-                        {{ old('aula_id') == $aula->id ? 'selected' : '' }}>
-                        {{ $aula->nombre }}
-                    </option>
-
-                    @empty
-                        No existen aulas
-                    @endforelse
+                    name="aula_id">
+                    @foreach ($aulas as $aula)
+                        <option value="{{ $aula->id }}"
+                            {{ old('aula_id', $ordenador->aula_id) == $aula->id ? 'selected' : '' }}
+                            >
+                            {{ $aula->nombre }}
+                        </option>
+                    @endforeach
                 </select>
                 <x-input-error :messages="$errors->get('aula_id')" class="mt-2" />
-
             </div>
 
             <div class="flex items-center justify-end mt-4">

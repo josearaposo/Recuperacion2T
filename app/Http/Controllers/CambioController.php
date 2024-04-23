@@ -13,7 +13,9 @@ class CambioController extends Controller
      */
     public function index()
     {
-        //
+        return view('cambios.index', [
+            'cambios' => Cambio::all(),
+        ]);
     }
 
     /**

@@ -61,6 +61,7 @@ class OrdenadorController extends Controller
     return view('ordenadores.detalle', [
         'ordenador' => $ordenador,
         'cambios' => $ordenador-> cambios,
+        'dispositivos' => $ordenador->dispositivos,
     ]);
    }
 

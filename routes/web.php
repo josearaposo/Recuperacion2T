@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CambioController;
+use App\Http\Controllers\DispositivoController;
 use App\Http\Controllers\OrdenadorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +35,6 @@ Route::middleware('auth')->group(function () {
 Route::resource('ordenadores', OrdenadorController::class )
 -> parameters(['ordenadores' => 'ordenador']);
 
+Route::resource('dispositivos', DispositivoController::class);
 
 require __DIR__.'/auth.php';

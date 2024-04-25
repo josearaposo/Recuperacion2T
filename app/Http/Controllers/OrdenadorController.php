@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Aula;
 use App\Models\Cambio;
 use App\Models\Ordenador;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Storage;
+
 
 class OrdenadorController extends Controller
 {
@@ -44,9 +49,17 @@ class OrdenadorController extends Controller
 
 
        $ordenador = new Ordenador();
+       $imagen = $request->file('foto');
+       Storage::makeDirectory('public/album');
+       $nombre = Carbon::now() . '.jpeg';
+       $manager = new ImageManager(new Driver());
+
+       $ordenador->guardar_imagen($imagen, $nombre, 100, $manager);
+
        $ordenador->marca = $validated['marca'];
        $ordenador->modelo = $validated['modelo'];
        $ordenador->aula_id = $validated['aula_id'];
+       $ordenador->foto = $nombre;
        $ordenador->save();
        session()->flash('success', 'El ordenador se ha creado correctamente.');
        return redirect()->route('ordenadores.index');
@@ -110,8 +123,13 @@ class OrdenadorController extends Controller
     */
    public function destroy(Ordenador $ordenador)
    {
-       $ordenador->delete();
-       return redirect()->route('ordenadores.index');
+    if ($ordenador->cambios->isEmpty() && $ordenador->dispositivos->isEmpty() ){
+        $ordenador->delete();
+    } else {
+        session()->flash('error', 'El ordenador tiene cambios o dispositivos.');
+    }
+    return redirect()->route('ordenadores.index');
+}
    }
 
-}
+

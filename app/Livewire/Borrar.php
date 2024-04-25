@@ -12,14 +12,14 @@ class Borrar extends Component
 
     public function borrado()
     {
-        if (confirm('¿Estás seguro de que deseas borrar todos los registros?')) {
+
             $cambios = Cambio::all();
             $cambios->each(function ($cambio) {
                 $cambio->delete();
             });
-        }
 
-        return back();
+
+            return redirect()->route('ordenadores.index');
     }
 
     public function render()

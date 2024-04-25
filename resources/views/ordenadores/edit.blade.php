@@ -21,7 +21,7 @@ Editar
                 <x-input-error :messages="$errors->get('modelo')" class="mt-2" />
             </div>
 
-            <!-- Desarrolladora -->
+            <!-- Aula -->
             <div class="mt-4">
                 <x-input-label for="aula_id" :value="'Aula del ordenador'" />
                 <select id="aula_id"

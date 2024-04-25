@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="w-1/2 mx-auto">
-        <form method="POST" action="{{ route('ordenadores.store') }}">
+        <form method="POST" action="{{ route('ordenadores.store') }}" enctype="multipart/form-data">
             @csrf
 
             <!-- Marca -->
@@ -17,6 +17,14 @@
                     required autofocus autocomplete="modelo" />
                 <x-input-error :messages="$errors->get('modelo')" class="mt-2" />
             </div>
+            <!-- Foto -->
+            <div>
+                <x-input-label for="foto" :value="'Foto del Jugador'" />
+                <x-text-input id="foto" class="block mt-1 w-full" type="file" name="foto" :value="old('foto')"
+                    required autofocus autocomplete="foto" />
+                <x-input-error :messages="$errors->get('foto')" class="mt-2" />
+            </div>
+            <!-- Aula -->
             <div>
                 <x-input-label for="aula_id" :value="'Aula del ordenador'" />
                 <select id="aula_id"
@@ -29,10 +37,10 @@
                     </option>
 
                     @empty
-                        No existen desarrolladoras
+                        No existen Aulas
                     @endforelse
                 </select>
-                <x-input-error :messages="$errors->get('desarrolladora_id')" class="mt-2" />
+                <x-input-error :messages="$errors->get('aula_id')" class="mt-2" />
 
             </div>
             <div class="flex items-center justify-end mt-4">
